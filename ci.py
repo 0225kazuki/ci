@@ -23,7 +23,7 @@ def read_asci(file_name, correct_data):
     with open(file_name,'r') as f:
         data = f.readlines()
         data = [i[:-1] for i in data]
-        
+
         #data_list=[]
         #for line in data:
         #    data_list.append([w=="\u3000" for w in line])
@@ -34,7 +34,7 @@ def read_asci(file_name, correct_data):
         #    if all(data_array[:,i]):
         #        sep_index.append(i)
         #sep_index.append(data_array.shape[1])
-    
+
         blank_array = np.array([[w=="\u3000" for w in line] for line in data])
         sep_index = np.where(np.array([all(row) for row in blank_array.T])==True)[0]
         sep_index = np.append(sep_index,blank_array.shape[1])
@@ -58,12 +58,12 @@ if __name__ == "__main__":
 
     input_nums = [int(i) for i in sys.argv[1]]
 
-    write_data = [list(i) for i in asci_nums[input_nums[0]]]
+    write_data = [i for i in asci_nums[input_nums[0]]]
     for input_num in input_nums[1:]:
         for i in range(len(asci_nums[input_num])):
-            write_data[i].append("\u3000"+asci_nums[input_num][i])
+            write_data[i] += "\u3000" + asci_nums[input_num][i]
 
     print(write_data)
     write_txt("test",write_data)
-    
+
     print(read_asci("test",asci_nums))
